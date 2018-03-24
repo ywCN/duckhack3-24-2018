@@ -24,3 +24,14 @@ export const loginFail = () => dispatch => {
 export const logout = () => dispatch => {
   dispatch({ type: LOG_OUT });
 };
+
+export const fetchEntries = () => async dispatch => {
+  dispatch({
+    type: FETCH_ENTRIES,
+    payload: [
+      { description: 'coke', amount: -1 },
+      { description: 'sell book', amount: 10 },
+      { description: 'eat', amount: -3 }
+    ]
+  });
+};
