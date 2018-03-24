@@ -31,4 +31,6 @@ class GoogLogin extends React.Component {
   }
 }
 
-export default connect(null, { loginSuccess })(withRouter(GoogLogin));
+export default connect(null, { loginSuccess, loginFail })(
+  withRouter(GoogLogin)
+);
