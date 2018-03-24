@@ -5,7 +5,7 @@ import GoogLogin from './GoogLogin';
 const Landing = () => {
   return (
     <div style={{ textAlign: 'center' }}>
-      <h1>Log your spending.</h1>
+      <h1>Manage your spending.</h1>
       <h1>Control your budget.</h1>
       <GoogLogin />
     </div>
