@@ -6,26 +6,6 @@ import { Header, Segment, Icon } from 'semantic-ui-react';
 import { logout } from './../actions';
 
 class AppHeader extends React.Component {
-  renderHeaderLeft() {
-    if (this.props.loginStatus) {
-      return (
-        <Header as={Link} floated="left" to="/dashboard">
-          Budget Manager
-        </Header>
-      );
-    } else {
-      return (
-        <Header
-          as={Link}
-          floated="left"
-          to="/"
-          onClick={() => console.log('logo clicked while logged out')}
-        >
-          Budget Manager
-        </Header>
-      );
-    }
-  }
   renderHeaderRight() {
     if (this.props.loginStatus) {
       return (
@@ -45,9 +25,12 @@ class AppHeader extends React.Component {
     }
   }
   render() {
+    const logoPath = this.props.loginStatus ? '/dashboard' : '/';
     return (
       <Segment clearing color="blue">
-        {this.renderHeaderLeft()}
+        <Header as={Link} floated="left" to={logoPath}>
+          Budget Manager
+        </Header>
         {this.renderHeaderRight()}
       </Segment>
     );
