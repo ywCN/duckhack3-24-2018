@@ -1,5 +1,6 @@
 import {
   LOGIN_SUCCESS,
+  SET_USER_INFO,
   LOGIN_FAIL,
   FETCH_ENTRIES,
   SET_CURRENT_ENTRY
@@ -16,6 +17,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return { ...state, loginStatus: true };
+    case SET_USER_INFO:
+      return { ...state, userInfo: action.payload };
     case LOGIN_FAIL:
       return { ...state, loginStatus: false };
     case FETCH_ENTRIES:
