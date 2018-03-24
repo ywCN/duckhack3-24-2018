@@ -3,6 +3,7 @@ import {
   LOGIN_SUCCESS,
   SET_USER_INFO,
   LOGIN_FAIL,
+  LOG_OUT,
   FETCH_ENTRIES,
   ADD_ENTRY,
   EDIT_ENTRY,
@@ -18,4 +19,8 @@ export const loginSuccess = (userInfo, redirect) => dispatch => {
 
 export const loginFail = () => dispatch => {
   dispatch({ type: LOGIN_FAIL });
+};
+
+export const logout = () => dispatch => {
+  dispatch({ type: LOG_OUT });
 };
