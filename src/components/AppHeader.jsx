@@ -59,8 +59,8 @@ class AppHeader extends React.Component {
   }
 }
 
-function mapStateToProps({ user: loginStatus }) {
-  return { loginStatus };
+function mapStateToProps(state) {
+  return { loginStatus: state.user.loginStatus };
 }
 
 export default connect(mapStateToProps, { logout })(AppHeader);
