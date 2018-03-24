@@ -1,19 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Header, Segment } from 'semantic-ui-react';
+import { Header, Segment, Icon } from 'semantic-ui-react';
+
 import { logout } from './../actions';
 
 class AppHeader extends React.Component {
   renderHeaderLeft() {
     if (this.props.loginStatus) {
       return (
-        <Header
-          as={Link}
-          floated="left"
-          to="/dashboard"
-          onClick={() => console.log('logo clicked while logged in')}
-        >
+        <Header as={Link} floated="left" to="/dashboard">
           Budget Manager
         </Header>
       );
@@ -40,10 +36,9 @@ class AppHeader extends React.Component {
             floated="right"
             onClick={() => {
               this.props.logout();
-              console.log('logout clicked');
             }}
           >
-            logout icon
+            <Icon name="log out" />
           </Header>
         </div>
       );
