@@ -10,8 +10,12 @@ import {
   SET_CURRENT_ENTRY
 } from './types';
 
-export const loginSuccess = (user, redirect) => dispatch => {
+export const loginSuccess = (userInfo, redirect) => dispatch => {
   dispatch({ type: LOGIN_SUCCESS });
-  dispatch({ type: SET_USER_INFO, payload: user });
+  dispatch({ type: SET_USER_INFO, payload: userInfo });
   redirect();
+};
+
+export const loginFail = () => dispatch => {
+  dispatch({ type: LOGIN_FAIL });
 };
