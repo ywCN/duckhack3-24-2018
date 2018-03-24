@@ -1,10 +1,19 @@
-// import { LOGIN_SUCCESS, LOGIN_FAIL, FETCH_ENTRIES, ADD_ENTRY, EDIT_ENTRY, DELETE_ENTRY, SET_CURRENT_ENTRY } from '../actions/types';
+import {
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  FETCH_ENTRIES,
+  ADD_ENTRY,
+  EDIT_ENTRY,
+  DELETE_ENTRY,
+  SET_CURRENT_ENTRY
+} from './../actions/types';
 
 const initialState = {
+  loginStatus: false,
   userInfo: {},
   entries: [],
-  currentEntryId: '',
-}
+  currentEntryId: ''
+};
 
 export default function(state = initialState, action) {
   switch (action.type) {
