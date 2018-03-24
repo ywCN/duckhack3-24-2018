@@ -2,26 +2,26 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   FETCH_ENTRIES,
-  ADD_ENTRY,
-  EDIT_ENTRY,
-  DELETE_ENTRY,
   SET_CURRENT_ENTRY
 } from './../actions/types';
 
 const initialState = {
-  loginStatus: false,
-  userInfo: {},
+  loginStatus: null,
+  userInfo: null,
   entries: [],
-  currentEntryId: ''
+  currentEntry: null
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    // case LOGIN_SUCCESS:
-    //   return { ...state, ...action.payload };
-    // case LOGIN_FAIL:
-    //   console.log('logout reducer invoked');
-    //   return null;
+    case LOGIN_SUCCESS:
+      return { ...state, loginStatus: true };
+    case LOGIN_FAIL:
+      return { ...state, loginStatus: false };
+    case FETCH_ENTRIES:
+      return { ...state, entries: action.payload };
+    case SET_CURRENT_ENTRY:
+      return { ...state, currentEntry: action.payload };
     default:
       return state;
   }
