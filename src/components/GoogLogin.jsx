@@ -14,7 +14,7 @@ class GoogLogin extends React.Component {
     );
   };
   responseOnFailure = response => {
-    console.error(response);
+    console.error('google auth response is', response);
     this.props.loginFail();
   };
   render() {
