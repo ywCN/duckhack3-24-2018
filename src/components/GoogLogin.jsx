@@ -18,19 +18,30 @@ class GoogLogin extends React.Component {
     this.props.loginFail();
   };
   render() {
+    const loginFailWarning =
+      this.props.loginStatus === false ? (
+        <h1>Login failed. Please try again.</h1>
+      ) : null;
     return (
-      <GoogleLogin
-        clientId="806914580079-9msqlpl8f51fd3diiflsthebog8l7p2u.apps.googleusercontent.com"
-        buttonText="Login with Google"
-        onSuccess={this.responseOnSuccess}
-        onFailure={this.responseOnFailure}
-        style={{}}
-        className="ui red fluid button"
-      />
+      <div>
+        <GoogleLogin
+          clientId="806914580079-9msqlpl8f51fd3diiflsthebog8l7p2u.apps.googleusercontent.com"
+          buttonText="Login with Google"
+          onSuccess={this.responseOnSuccess}
+          onFailure={this.responseOnFailure}
+          style={{}}
+          className="ui red fluid button"
+        />
+        {loginFailWarning}
+      </div>
     );
   }
 }
 
-export default connect(null, { loginSuccess, loginFail })(
+const mapStateToProps = state => {
+  return { loginStatus: state.user.loginStatus };
+};
+
+export default connect(mapStateToProps, { loginSuccess, loginFail })(
   withRouter(GoogLogin)
 );
