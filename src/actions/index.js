@@ -9,3 +9,9 @@ import {
   DELETE_ENTRY,
   SET_CURRENT_ENTRY
 } from './types';
+
+export const loginSuccess = (user, redirect) => dispatch => {
+  dispatch({ type: LOGIN_SUCCESS });
+  dispatch({ type: SET_USER_INFO, payload: user });
+  redirect();
+};
