@@ -15,6 +15,7 @@ class Dashboard extends Component {
     } else {
       return (
         <div>
+          <h3>Click Add Entry to add a new entry. Then Edit it.</h3>
           <EntryList />
           <Button
             primary
