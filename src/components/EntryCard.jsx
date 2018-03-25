@@ -1,31 +1,38 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 
-import { setCurrentEntry } from './../actions';
+import { setCurrentEntry, deleteEntry, updateEntry } from './../actions';
 
 class EntryCard extends Component {
   state = {
+    editing: false,
     description: this.props.entry.description,
     amount: this.props.entry.amount
   };
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
-  handleSubmit = () => {
-    const { description, amount } = this.state;
-    console.log({ description, amount });
+  handleEdit = () => {
+    this.setState({ editing: true });
   };
 
-  handleDelete = () => {
-    console.log('delete button clicked');
+  handleDelete = () => {};
+
+  handleSave = () => {
+    this.setState({ editing: false });
   };
 
   render() {
-    const { description, amount } = this.state;
+    const { description, amount, editing } = this.state;
+    const saveOrEditButton = editing ? (
+      <Form.Button icon="save" onClick={this.handleSave} />
+    ) : (
+      <Form.Button icon="edit" onClick={this.handleEdit} />
+    );
 
     return (
-      <Form.Group>
+      <Form.Group widths={3}>
         <Form.Input
           name="description"
           defaultValue={description}
@@ -36,8 +43,10 @@ class EntryCard extends Component {
           defaultValue={amount}
           onChange={this.handleChange}
         />
-        <Form.Button icon="edit" onClick={this.handleSubmit} />
-        <Form.Button icon="delete" onClick={this.handleDelete} />
+        <Button.Group>
+          {saveOrEditButton}
+          <Form.Button icon="delete" onClick={this.handleDelete} />
+        </Button.Group>
       </Form.Group>
     );
   }
@@ -47,4 +56,8 @@ const mapStateToProps = state => {
   return { userInfo: state.user.userInfo };
 };
 
-export default connect(mapStateToProps, { setCurrentEntry })(EntryCard);
+export default connect(mapStateToProps, {
+  setCurrentEntry,
+  deleteEntry,
+  updateEntry
+})(EntryCard);
