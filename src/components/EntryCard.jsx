@@ -42,4 +42,8 @@ class EntryCard extends Component {
   }
 }
 
-export default connect(null, { setCurrentEntry })(EntryCard);
+const mapStateToProps = state => {
+  return { userInfo: state.user.userInfo };
+};
+
+export default connect(mapStateToProps, { setCurrentEntry })(EntryCard);

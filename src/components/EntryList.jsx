@@ -6,6 +6,9 @@ import { fetchEntries } from './../actions';
 import EntryCard from './EntryCard';
 
 class EntryList extends Component {
+  componentWillMount() {
+    this.props.fetchEntries(this.props.userInfo.googleId);
+  }
   render() {
     return (
       <div>
@@ -18,7 +21,7 @@ class EntryList extends Component {
 }
 
 const mapStateToProps = state => {
-  return { entries: state.user.entries };
+  return { entries: state.user.entries, userInfo: state.user.userInfo };
 };
 
 export default connect(mapStateToProps, {

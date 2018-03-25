@@ -26,15 +26,16 @@ export const logout = () => dispatch => {
   dispatch({ type: LOG_OUT });
 };
 
-export const fetchEntries = () => async dispatch => {
-  dispatch({
-    type: FETCH_ENTRIES,
-    payload: [
-      { description: 'coke', amount: -1 },
-      { description: 'sell book', amount: 10 },
-      { description: 'eat', amount: -3 }
-    ]
-  });
+export const fetchEntries = currentUserId => dispatch => {
+  firebase
+    .database()
+    .ref(`/users/${currentUserId}/entries`)
+    .on('value', snapshot => {
+      dispatch({
+        type: FETCH_ENTRIES,
+        payload: snapshot.val()
+      });
+    });
 };
 
 export const createEmptyEntry = currentUserId => dispatch => {
