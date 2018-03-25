@@ -66,14 +66,14 @@ export const updateEntry = (userId, entryId, entry) => dispatch => {
     .ref(`/users/${userId}/entries/${entryId}`)
     .set(entry)
     .then(() => {
-      dispatch({ type: DELETE_ENTRY });
+      dispatch({ type: EDIT_ENTRY });
       dispatch(fetchEntries(userId));
     });
 };
 
-export const setCurrentEntry = entry => {
-  return {
-    type: SET_CURRENT_ENTRY,
-    payload: entry
-  };
-};
+// export const setCurrentEntry = entry => {
+//   return {
+//     type: SET_CURRENT_ENTRY,
+//     payload: entry
+//   };
+// };
