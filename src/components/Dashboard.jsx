@@ -14,12 +14,17 @@ class Dashboard extends Component {
           content="Add Entry"
           icon="plus"
           labelPosition="right"
-          onClick={this.props.createEmptyEntry}
-          // onClick={() => console.log('add entry clicked')}
+          onClick={() =>
+            this.props.createEmptyEntry(this.props.userInfo.googleId)
+          }
         />
       </div>
     );
   }
 }
 
-export default connect(null, { createEmptyEntry })(Dashboard);
+const mapStateToProps = state => {
+  return { userInfo: state.user.userInfo };
+};
+
+export default connect(mapStateToProps, { createEmptyEntry })(Dashboard);
