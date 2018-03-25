@@ -11,12 +11,6 @@ class GoogLogin extends React.Component {
     const { profileObj } = response;
     const cookies = new Cookies();
     this.props.loginSuccess(
-      () => {
-        window.localStorage.setItem(
-          '200-ok-error-userInfo',
-          profileObj.googleId
-        );
-      },
       () => this.props.history.push('/dashboard'),
       () =>
         cookies.set('200-ok-error-userInfo', profileObj.googleId, { path: '/' })

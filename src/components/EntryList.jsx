@@ -2,17 +2,16 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form } from 'semantic-ui-react';
+import Cookies from 'universal-cookie';
 
 import { fetchEntries } from './../actions';
 import EntryCard from './EntryCard';
 
 class EntryList extends Component {
-  state = {
-    googleId: window.localStorage.getItem('200-ok-error-userInfo')
-  };
-
   componentWillMount() {
-    this.props.fetchEntries(this.state.googleId);
+    const cookies = new Cookies();
+    const cookie = cookies.get('200-ok-error-userInfo');
+    this.props.fetchEntries(cookie);
     this.renderCards();
   }
 

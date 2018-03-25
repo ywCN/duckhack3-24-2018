@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import {
   LOGIN_SUCCESS,
-  SET_USER_INFO_IN_LOCAL_STORAGE,
+  SET_COOKIE,
   LOGIN_FAIL,
   LOG_OUT,
   FETCH_ENTRIES,
@@ -11,14 +11,9 @@ import {
   // SET_CURRENT_ENTRY
 } from './types';
 
-export const loginSuccess = (
-  setLocalStorage,
-  redirect,
-  setCookie
-) => dispatch => {
+export const loginSuccess = (redirect, setCookie) => dispatch => {
   dispatch({ type: LOGIN_SUCCESS });
-  setLocalStorage();
-  dispatch({ type: SET_USER_INFO_IN_LOCAL_STORAGE });
+  dispatch({ type: SET_COOKIE });
   setCookie();
   redirect();
 };

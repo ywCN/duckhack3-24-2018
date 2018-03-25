@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Button } from 'semantic-ui-react';
+import Cookies from 'universal-cookie';
 
 import { deleteEntry, updateEntry } from './../actions';
 
 class EntryCard extends Component {
-  state = {
-    editing: false,
-    description: this.props.entry.description,
-    amount: this.props.entry.amount,
-    googleId: window.localStorage.getItem('200-ok-error-userInfo')
-  };
+  constructor(props) {
+    super(props);
+    const cookies = new Cookies();
+    this.state = {
+      editing: false,
+      description: this.props.entry.description,
+      amount: this.props.entry.amount,
+      cookie: cookies.get('200-ok-error-userInfo')
+    };
+  }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
@@ -19,13 +24,13 @@ class EntryCard extends Component {
   };
 
   handleDelete = () => {
-    this.props.deleteEntry(this.state.googleId, this.props.entryId);
+    this.props.deleteEntry(this.state.cookie, this.props.entryId);
   };
 
   handleSave = () => {
-    const { description, amount, googleId } = this.state;
+    const { description, amount, cookie } = this.state;
     this.setState({ editing: false });
-    this.props.updateEntry(googleId, this.props.entryId, {
+    this.props.updateEntry(cookie, this.props.entryId, {
       description,
       amount
     });

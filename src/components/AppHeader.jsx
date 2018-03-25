@@ -3,13 +3,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Header, Segment, Icon } from 'semantic-ui-react';
+import Cookies from 'universal-cookie';
 
 import { logout } from './../actions';
 
 class AppHeader extends React.Component {
-  state = {
-    googleId: window.localStorage.getItem('200-ok-error-userInfo')
-  };
+  constructor(props) {
+    super(props);
+    const cookies = new Cookies();
+    this.state = {
+      cookie: cookies.get('200-ok-error-userInfo')
+    };
+  }
 
   calculateBalance = () => {
     let balance = 0;
@@ -20,7 +25,8 @@ class AppHeader extends React.Component {
   };
 
   renderHeaderRight = () => {
-    if (this.props.loginStatus || this.state.googleId) {
+    const cookies = new Cookies();
+    if (this.props.loginStatus || this.state.cookie) {
       return (
         <div>
           <Header
@@ -28,9 +34,7 @@ class AppHeader extends React.Component {
             to="/logout"
             floated="right"
             onClick={() => {
-              this.props.logout(() =>
-                window.localStorage.removeItem('200-ok-error-userInfo')
-              );
+              this.props.logout(() => cookies.remove('200-ok-error-userInfo'));
             }}
           >
             <Icon name="log out" />
