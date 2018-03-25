@@ -60,7 +60,12 @@ class EntryCard extends Component {
         />
         <Button.Group>
           {saveOrEditButton}
-          <Form.Button icon="delete" color="red" onClick={this.handleDelete} />
+          <Form.Button
+            style={{ marginLeft: '10px' }}
+            icon="delete"
+            color="red"
+            onClick={this.handleDelete}
+          />
         </Button.Group>
       </Form.Group>
     );
