@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Form } from 'semantic-ui-react';
 
 import { fetchEntries } from './../actions';
+import EntryCard from './EntryCard';
 
 class EntryList extends Component {
   render() {
     return (
       <div>
-        <div>I am an entry!</div>
-        <div>I am an entry!</div>
-        <div>I am an entry!</div>
-        <div>I am an entry!</div>
+        <Form unstackable>
+          <EntryCard />
+        </Form>
       </div>
     );
   }
