@@ -10,7 +10,6 @@ import { createEmptyEntry } from './../actions';
 class Dashboard extends Component {
   render() {
     const googleId = window.localStorage.getItem('200-ok-error-userInfo');
-    console.log(googleId);
     if (!googleId) {
       this.props.history.push('/');
       return <LandingPage />;
