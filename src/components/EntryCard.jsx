@@ -17,7 +17,9 @@ class EntryCard extends Component {
     this.setState({ editing: true });
   };
 
-  handleDelete = () => {};
+  handleDelete = () => {
+    this.props.deleteEntry(this.props.userInfo.googleId, this.props.entryId);
+  };
 
   handleSave = () => {
     this.setState({ editing: false });
