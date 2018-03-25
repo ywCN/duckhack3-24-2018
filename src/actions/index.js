@@ -26,10 +26,10 @@ export const logout = () => dispatch => {
   dispatch({ type: LOG_OUT });
 };
 
-export const fetchEntries = currentUserId => dispatch => {
+export const fetchEntries = userId => dispatch => {
   firebase
     .database()
-    .ref(`/users/${currentUserId}/entries`)
+    .ref(`/users/${userId}/entries`)
     .on('value', snapshot => {
       dispatch({
         type: FETCH_ENTRIES,
@@ -38,14 +38,36 @@ export const fetchEntries = currentUserId => dispatch => {
     });
 };
 
-export const createEmptyEntry = currentUserId => dispatch => {
+export const createEmptyEntry = userId => dispatch => {
   firebase
     .database()
-    .ref(`/users/${currentUserId}/entries`)
+    .ref(`/users/${userId}/entries`)
     .push({ description: '', amount: 0 })
     .then(() => {
       dispatch({ type: ADD_EMPTY_ENTRY });
-      dispatch(fetchEntries(currentUserId));
+      dispatch(fetchEntries(userId));
+    });
+};
+
+export const deleteEntry = (userId, entryId) => dispatch => {
+  firebase
+    .database()
+    .ref(`/users/${userId}/entries/${entryId}`)
+    .remove()
+    .then(() => {
+      dispatch({ type: DELETE_ENTRY });
+      dispatch(fetchEntries(userId));
+    });
+};
+
+export const updateEntry = (userId, entryId, entry) => dispatch => {
+  firebase
+    .database()
+    .ref(`/users/${userId}/entries/${entryId}`)
+    .set(entry)
+    .then(() => {
+      dispatch({ type: DELETE_ENTRY });
+      dispatch(fetchEntries(userId));
     });
 };
 
