@@ -28,9 +28,9 @@ class EntryCard extends Component {
   render() {
     const { description, amount, editing } = this.state;
     const saveOrEditButton = editing ? (
-      <Form.Button icon="save" onClick={this.handleSave} />
+      <Form.Button icon="save" color="green" onClick={this.handleSave} />
     ) : (
-      <Form.Button icon="edit" onClick={this.handleEdit} />
+      <Form.Button icon="edit" color="blue" onClick={this.handleEdit} />
     );
 
     return (
@@ -47,7 +47,7 @@ class EntryCard extends Component {
         />
         <Button.Group>
           {saveOrEditButton}
-          <Form.Button icon="delete" onClick={this.handleDelete} />
+          <Form.Button icon="delete" color="red" onClick={this.handleDelete} />
         </Button.Group>
       </Form.Group>
     );

@@ -17,6 +17,7 @@ class Dashboard extends Component {
         <div>
           <EntryList />
           <Button
+            primary
             content="Add Entry"
             icon="plus"
             labelPosition="right"
