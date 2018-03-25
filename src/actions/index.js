@@ -45,7 +45,7 @@ export const createEmptyEntry = currentUserId => dispatch => {
     .push({ description: '', amount: 0 })
     .then(() => {
       dispatch({ type: ADD_EMPTY_ENTRY });
-      // dispatch(dispatch(fetchEntries()));
+      dispatch(fetchEntries(currentUserId));
     });
 };
 
