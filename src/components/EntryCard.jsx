@@ -50,7 +50,9 @@ class EntryCard extends Component {
         icon="save"
         color="green"
         onClick={this.handleSave}
-        disabled={isNaN(amount) || amount === '' ? true : false}
+        disabled={
+          isNaN(amount) || amount === '' || description === '' ? true : false
+        }
       />
     ) : (
       <Form.Button icon="edit" color="blue" onClick={this.handleEdit} />
