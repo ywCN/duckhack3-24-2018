@@ -11,10 +11,15 @@ import {
   // SET_CURRENT_ENTRY
 } from './types';
 
-export const loginSuccess = (setLocalStorage, redirect) => dispatch => {
+export const loginSuccess = (
+  setLocalStorage,
+  redirect,
+  setCookie
+) => dispatch => {
   dispatch({ type: LOGIN_SUCCESS });
   setLocalStorage();
   dispatch({ type: SET_USER_INFO_IN_LOCAL_STORAGE });
+  setCookie();
   redirect();
 };
 

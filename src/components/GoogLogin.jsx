@@ -2,12 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
+import Cookies from 'universal-cookie';
 
 import { loginSuccess, loginFail } from '../actions';
 
 class GoogLogin extends React.Component {
   responseOnSuccess = response => {
     const { profileObj } = response;
+    const cookies = new Cookies();
     this.props.loginSuccess(
       () => {
         window.localStorage.setItem(
@@ -15,7 +17,9 @@ class GoogLogin extends React.Component {
           profileObj.googleId
         );
       },
-      () => this.props.history.push('/dashboard')
+      () => this.props.history.push('/dashboard'),
+      () =>
+        cookies.set('200-ok-error-userInfo', profileObj.googleId, { path: '/' })
     );
   };
   responseOnFailure = response => {
