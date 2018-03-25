@@ -1,4 +1,5 @@
 import axios from 'axios';
+import firebase from 'firebase';
 import {
   LOGIN_SUCCESS,
   SET_USER_INFO,
@@ -34,4 +35,22 @@ export const fetchEntries = () => async dispatch => {
       { description: 'eat', amount: -3 }
     ]
   });
+};
+
+export const createEntry = (entry, currentUserId) => dispatch => {
+  firebase
+    .database()
+    .ref(`/users/${currentUserId}/entries`)
+    .push(entry)
+    .then(() => {
+      dispatch({ type: ADD_ENTRY });
+      // dispatch(dispatch(fetchEntries()));
+    });
+};
+
+export const setCurrentEntry = entry => {
+  return {
+    type: SET_CURRENT_ENTRY,
+    payload: entry
+  };
 };
