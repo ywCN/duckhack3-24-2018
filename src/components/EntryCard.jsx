@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Button } from 'semantic-ui-react';
 
-import { setCurrentEntry, deleteEntry, updateEntry } from './../actions';
+import {
+  // setCurrentEntry,
+  deleteEntry,
+  updateEntry
+} from './../actions';
 
 class EntryCard extends Component {
   state = {
@@ -68,7 +72,7 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  setCurrentEntry,
+  // setCurrentEntry,
   deleteEntry,
   updateEntry
 })(EntryCard);

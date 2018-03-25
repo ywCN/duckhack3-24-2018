@@ -1,4 +1,3 @@
-import axios from 'axios';
 import firebase from 'firebase';
 import {
   LOGIN_SUCCESS,
@@ -8,8 +7,8 @@ import {
   FETCH_ENTRIES,
   ADD_EMPTY_ENTRY,
   EDIT_ENTRY,
-  DELETE_ENTRY,
-  SET_CURRENT_ENTRY
+  DELETE_ENTRY
+  // SET_CURRENT_ENTRY
 } from './types';
 
 export const loginSuccess = (userInfo, redirect) => dispatch => {
