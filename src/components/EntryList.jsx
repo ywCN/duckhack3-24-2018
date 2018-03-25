@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form } from 'semantic-ui-react';
@@ -8,13 +9,18 @@ import EntryCard from './EntryCard';
 class EntryList extends Component {
   componentWillMount() {
     this.props.fetchEntries(this.props.userInfo.googleId);
+    this.renderCards();
   }
+  renderCards = entries => {
+    return _.map(entries, (value, key) => {
+      return <EntryCard key={key} entryId={key} entry={value} />;
+    });
+  };
   render() {
+    const { entries } = this.props;
     return (
       <div>
-        <Form unstackable>
-          <EntryCard />
-        </Form>
+        <Form unstackable>{this.renderCards(entries)}</Form>
       </div>
     );
   }

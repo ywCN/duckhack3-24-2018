@@ -5,13 +5,16 @@ import { Form } from 'semantic-ui-react';
 import { setCurrentEntry } from './../actions';
 
 class EntryCard extends Component {
-  state = { name: '', email: '', submittedName: '', submittedEmail: '' };
+  state = {
+    description: this.props.entry.description,
+    amount: this.props.entry.amount
+  };
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
   handleSubmit = () => {
-    const { name, email } = this.state;
-    console.log({ name, email });
+    const { description, amount } = this.state;
+    console.log({ description, amount });
   };
 
   handleDelete = () => {
@@ -19,20 +22,18 @@ class EntryCard extends Component {
   };
 
   render() {
-    const { name, email } = this.state;
+    const { description, amount } = this.state;
 
     return (
       <Form.Group>
         <Form.Input
-          placeholder="Name"
-          name="name"
-          value={name}
+          name="description"
+          defaultValue={description}
           onChange={this.handleChange}
         />
         <Form.Input
-          placeholder="Email"
-          name="email"
-          value={email}
+          name="amount"
+          defaultValue={amount}
           onChange={this.handleChange}
         />
         <Form.Button icon="edit" onClick={this.handleSubmit} />
