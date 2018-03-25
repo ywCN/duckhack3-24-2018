@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import {
   LOGIN_SUCCESS,
-  SET_USER_INFO,
+  SET_USER_INFO_IN_LOCAL_STORAGE,
   LOGIN_FAIL,
   LOG_OUT,
   FETCH_ENTRIES,
@@ -14,7 +14,7 @@ import {
 export const loginSuccess = (setLocalStorage, redirect) => dispatch => {
   dispatch({ type: LOGIN_SUCCESS });
   setLocalStorage();
-  dispatch({ type: SET_USER_INFO });
+  dispatch({ type: SET_USER_INFO_IN_LOCAL_STORAGE });
   redirect();
 };
 
