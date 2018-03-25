@@ -6,7 +6,7 @@ import {
   LOGIN_FAIL,
   LOG_OUT,
   FETCH_ENTRIES,
-  ADD_ENTRY,
+  ADD_EMPTY_ENTRY,
   EDIT_ENTRY,
   DELETE_ENTRY,
   SET_CURRENT_ENTRY
@@ -37,13 +37,13 @@ export const fetchEntries = () => async dispatch => {
   });
 };
 
-export const createEntry = (entry, currentUserId) => dispatch => {
+export const createEmptyEntry = currentUserId => dispatch => {
   firebase
     .database()
     .ref(`/users/${currentUserId}/entries`)
-    .push(entry)
+    .push({ description: '', amount: 0 })
     .then(() => {
-      dispatch({ type: ADD_ENTRY });
+      dispatch({ type: ADD_EMPTY_ENTRY });
       // dispatch(dispatch(fetchEntries()));
     });
 };
