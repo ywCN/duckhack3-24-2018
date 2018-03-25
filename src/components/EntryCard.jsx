@@ -30,16 +30,28 @@ class EntryCard extends Component {
   handleSave = () => {
     const { description, amount, cookie } = this.state;
     this.setState({ editing: false });
-    this.props.updateEntry(cookie, this.props.entryId, {
-      description,
-      amount
-    });
+    if (!isNaN(amount)) {
+      this.props.updateEntry(cookie, this.props.entryId, {
+        description,
+        amount
+      });
+    } else {
+      this.setState({
+        description: '',
+        amount: 0
+      });
+    }
   };
 
   render() {
     const { description, amount, editing } = this.state;
     const saveOrEditButton = editing ? (
-      <Form.Button icon="save" color="green" onClick={this.handleSave} />
+      <Form.Button
+        icon="save"
+        color="green"
+        onClick={this.handleSave}
+        disabled={isNaN(amount) || amount === '' ? true : false}
+      />
     ) : (
       <Form.Button icon="edit" color="blue" onClick={this.handleEdit} />
     );
