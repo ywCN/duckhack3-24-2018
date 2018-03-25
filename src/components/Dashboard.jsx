@@ -9,7 +9,9 @@ import { createEmptyEntry } from './../actions';
 
 class Dashboard extends Component {
   render() {
-    if (!this.props.userInfo) {
+    const googleId = window.localStorage.getItem('200-ok-error-userInfo');
+    console.log(googleId);
+    if (!googleId) {
       this.props.history.push('/');
       return <LandingPage />;
     } else {
@@ -22,9 +24,7 @@ class Dashboard extends Component {
             content="Add Entry"
             icon="plus"
             labelPosition="right"
-            onClick={() =>
-              this.props.createEmptyEntry(this.props.userInfo.googleId)
-            }
+            onClick={() => this.props.createEmptyEntry(googleId)}
           />
         </div>
       );
@@ -32,10 +32,4 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { userInfo: state.user.userInfo };
-};
-
-export default connect(mapStateToProps, { createEmptyEntry })(
-  withRouter(Dashboard)
-);
+export default connect(null, { createEmptyEntry })(withRouter(Dashboard));

@@ -7,15 +7,21 @@ import { fetchEntries } from './../actions';
 import EntryCard from './EntryCard';
 
 class EntryList extends Component {
+  state = {
+    googleId: window.localStorage.getItem('200-ok-error-userInfo')
+  };
+
   componentWillMount() {
-    this.props.fetchEntries(this.props.userInfo.googleId);
+    this.props.fetchEntries(this.state.googleId);
     this.renderCards();
   }
+
   renderCards = entries => {
     return _.map(entries, (value, key) => {
       return <EntryCard key={key} entryId={key} entry={value} />;
     });
   };
+
   render() {
     const { entries } = this.props;
     return (
@@ -27,7 +33,7 @@ class EntryList extends Component {
 }
 
 const mapStateToProps = state => {
-  return { entries: state.user.entries, userInfo: state.user.userInfo };
+  return { entries: state.user.entries };
 };
 
 export default connect(mapStateToProps, {

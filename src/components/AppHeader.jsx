@@ -7,6 +7,10 @@ import { Header, Segment, Icon } from 'semantic-ui-react';
 import { logout } from './../actions';
 
 class AppHeader extends React.Component {
+  state = {
+    googleId: window.localStorage.getItem('200-ok-error-userInfo')
+  };
+
   calculateBalance = () => {
     let balance = 0;
     _.forEach(this.props.entries, entry => {
@@ -16,7 +20,7 @@ class AppHeader extends React.Component {
   };
 
   renderHeaderRight = () => {
-    if (this.props.loginStatus) {
+    if (this.props.loginStatus || this.state.googleId) {
       return (
         <div>
           <Header
@@ -24,7 +28,9 @@ class AppHeader extends React.Component {
             to="/logout"
             floated="right"
             onClick={() => {
-              this.props.logout();
+              this.props.logout(() =>
+                window.localStorage.removeItem('200-ok-error-userInfo')
+              );
             }}
           >
             <Icon name="log out" />
@@ -35,7 +41,8 @@ class AppHeader extends React.Component {
   };
 
   render() {
-    const logoPath = this.props.loginStatus ? '/dashboard' : '/';
+    const logoPath =
+      this.state.googleId || this.props.loginStatus ? '/dashboard' : '/';
     return (
       <Segment clearing color="blue">
         <Header as={Link} floated="left" to={logoPath}>

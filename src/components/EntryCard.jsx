@@ -2,17 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Button } from 'semantic-ui-react';
 
-import {
-  // setCurrentEntry,
-  deleteEntry,
-  updateEntry
-} from './../actions';
+import { deleteEntry, updateEntry } from './../actions';
 
 class EntryCard extends Component {
   state = {
     editing: false,
     description: this.props.entry.description,
-    amount: this.props.entry.amount
+    amount: this.props.entry.amount,
+    googleId: window.localStorage.getItem('200-ok-error-userInfo')
   };
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
@@ -22,13 +19,13 @@ class EntryCard extends Component {
   };
 
   handleDelete = () => {
-    this.props.deleteEntry(this.props.userInfo.googleId, this.props.entryId);
+    this.props.deleteEntry(this.state.googleId, this.props.entryId);
   };
 
   handleSave = () => {
-    const { description, amount } = this.state;
+    const { description, amount, googleId } = this.state;
     this.setState({ editing: false });
-    this.props.updateEntry(this.props.userInfo.googleId, this.props.entryId, {
+    this.props.updateEntry(googleId, this.props.entryId, {
       description,
       amount
     });
@@ -72,12 +69,7 @@ class EntryCard extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { userInfo: state.user.userInfo };
-};
-
-export default connect(mapStateToProps, {
-  // setCurrentEntry,
+export default connect(null, {
   deleteEntry,
   updateEntry
 })(EntryCard);

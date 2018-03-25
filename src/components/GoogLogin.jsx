@@ -8,9 +8,14 @@ import { loginSuccess, loginFail } from '../actions';
 class GoogLogin extends React.Component {
   responseOnSuccess = response => {
     const { profileObj } = response;
-    console.log('google auth response is', profileObj);
-    this.props.loginSuccess(profileObj, () =>
-      this.props.history.push('/dashboard')
+    this.props.loginSuccess(
+      () => {
+        window.localStorage.setItem(
+          '200-ok-error-userInfo',
+          profileObj.googleId
+        );
+      },
+      () => this.props.history.push('/dashboard')
     );
   };
   responseOnFailure = response => {

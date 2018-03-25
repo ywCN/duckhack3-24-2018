@@ -11,9 +11,10 @@ import {
   // SET_CURRENT_ENTRY
 } from './types';
 
-export const loginSuccess = (userInfo, redirect) => dispatch => {
+export const loginSuccess = (setLocalStorage, redirect) => dispatch => {
   dispatch({ type: LOGIN_SUCCESS });
-  dispatch({ type: SET_USER_INFO, payload: userInfo });
+  setLocalStorage();
+  dispatch({ type: SET_USER_INFO });
   redirect();
 };
 
@@ -21,7 +22,8 @@ export const loginFail = () => dispatch => {
   dispatch({ type: LOGIN_FAIL });
 };
 
-export const logout = () => dispatch => {
+export const logout = removeGoogleId => dispatch => {
+  removeGoogleId();
   dispatch({ type: LOG_OUT });
 };
 
