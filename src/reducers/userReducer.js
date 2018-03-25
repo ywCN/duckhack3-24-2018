@@ -10,7 +10,7 @@ import {
 const initialState = {
   loginStatus: null,
   userInfo: null,
-  entries: [],
+  entries: null,
   currentEntry: null
 };
 
