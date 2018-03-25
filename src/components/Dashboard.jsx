@@ -6,12 +6,7 @@ const Dashboard = () => {
   return (
     <div>
       <EntryList />
-      <Button
-        content="Add Entry"
-        icon="plus"
-        labelPosition="right"
-        floated="right"
-      />
+      <Button content="Add Entry" icon="plus" labelPosition="right" />
     </div>
   );
 };
