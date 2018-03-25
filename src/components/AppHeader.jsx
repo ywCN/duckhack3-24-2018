@@ -10,7 +10,7 @@ class AppHeader extends React.Component {
   calculateBalance = () => {
     let balance = 0;
     _.forEach(this.props.entries, entry => {
-      balance += parseInt(entry.amount);
+      balance += parseInt(entry.amount, 10);
     });
     return balance;
   };
