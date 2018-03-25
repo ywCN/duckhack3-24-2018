@@ -22,7 +22,12 @@ class EntryCard extends Component {
   };
 
   handleSave = () => {
+    const { description, amount } = this.state;
     this.setState({ editing: false });
+    this.props.updateEntry(this.props.userInfo.googleId, this.props.entryId, {
+      description,
+      amount
+    });
   };
 
   render() {
@@ -36,14 +41,18 @@ class EntryCard extends Component {
     return (
       <Form.Group widths={3}>
         <Form.Input
+          fluid
           name="description"
           defaultValue={description}
           onChange={this.handleChange}
+          readOnly={!editing}
         />
         <Form.Input
+          fluid
           name="amount"
           defaultValue={amount}
           onChange={this.handleChange}
+          readOnly={!editing}
         />
         <Button.Group>
           {saveOrEditButton}
